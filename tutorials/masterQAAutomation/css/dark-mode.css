@@ -1,7 +1,8 @@
 :root {
     --bg-primary: #201d1d;
     --font-primary: whitesmoke;
-    --border-dm: rgba(103, 89, 89, 0.679);
+    /* --border-dm: rgba(103, 89, 89, 0.679); */
+    --border-dm: rgba(95, 103, 89, 0.679);
 }
 .dark-mode #targetDiv header,
 .dark-mode {

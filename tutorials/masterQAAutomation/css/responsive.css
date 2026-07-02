@@ -58,13 +58,13 @@
         margin-left: 8% !important;
     }
     .side-bar-links-container > ul >li {
-        font-size: 70% !important;
+        /* font-size: 50% !important; */
     }
     .side-bar-links-container > ul >li > ul >li {
-        font-size: 60% !important;
+        /* font-size: 60% !important; */
     }
     .side-bar ul li a{
-        font-size: .86rem;
+        /* font-size: .86rem; */
     }
     .step-content p {
         font-size: 75%;   

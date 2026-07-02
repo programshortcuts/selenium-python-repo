@@ -1,10 +1,10 @@
 :root{
-    /* --bkgrnd: rgb(115, 108, 108); */
-    --bcolor: rgb(113, 115, 108);
+    --bcolor: rgb(133, 148, 141);
     --txtcolor: color: rgb(47, 88, 139);
+    --bkgrnd: rgb(167, 195, 182);
 }
 body{
-    /* background-color: rgba(76, 89, 105,.3); */
+    background-color: var(--bkgrnd)
 }
 .page-header,
 .nav-bar-lesson-title,

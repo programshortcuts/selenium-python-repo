@@ -1,6 +1,7 @@
 *{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     word-spacing: 2px;
+    font-size: 1rem;
 }
 .page-header.grid .box a {
     text-decoration: none;
@@ -11,4 +12,13 @@
 }
 .drop-down{
     text-decoration: none;
+}
+
+.side-bar li a,
+.side-bar li {
+    font-size: .7rem;
+}
+.side-bar ul>li>ul>li>a {
+    /* font-size: 80%; */
+    
 }

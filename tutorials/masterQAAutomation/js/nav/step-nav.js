@@ -30,23 +30,29 @@ export function initStepNavigation({ mainTargetDiv }) {
             lastStep = step;
             currentIndex = index;
 
+            // changeTutorialLink(step); // ✅ ALWAYS SYNC HERE
+
             step.scrollIntoView({
                 behavior: 'smooth',
                 block: 'center'
             });
         });
 
-        step.addEventListener('click', (e) => {
-            changeTutorialLink(e);
+        step.addEventListener('click', () => {
+            changeTutorialLink(step);
         });
 
-        step.addEventListener('pointerup', (e) => {
-            changeTutorialLink(e);
-        });
+        // step.addEventListener('click', (e) => {
+        //     changeTutorialLink(step);
+        // });
 
-        step.addEventListener('touchend', (e) => {
-            changeTutorialLink(e);
-        });
+        // step.addEventListener('pointerup', (e) => {
+        //     changeTutorialLink(step);
+        // });
+
+        // step.addEventListener('touchend', (e) => {
+        //     changeTutorialLink(step);
+        // });
 
         step.addEventListener('keydown', (e) => handleStepKey(e, step, index));
     });
@@ -60,56 +66,32 @@ function handleStepKey(e, step, index) {
     const key = e.key.toLowerCase();
     const active = document.activeElement;
 
-    if(e.target.tagName == 'A' && key == 'enter'){
-        open(e.target.href, '_blank')
-    }
-    function getFirstFocusableChild(targetStep) {
-        return [...targetStep.querySelectorAll(
-            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]'
-        )].find((el) => {
-            if (el.matches('a, img, video, audio') || el.hasAttribute('disabled')) return false;
-            return !el.closest('.vid-cntrl-btns');
-        });
-    }
-
     if (!step.contains(active)) return;
 
-    changeTutorialLink(e);
+    // ALWAYS update tutorial link based on current step
+    // changeTutorialLink(step);
 
-    /* =========================
-       SHIFT + ENTER → cycle media
-    ========================= */
     if (key === 'enter' && e.shiftKey) {
         e.preventDefault();
-
         cycleMedia(step);
         return;
     }
 
-    /* =========================
-       ENTER → step action / media fallback
-    ========================= */
     if (key === 'enter' && !e.shiftKey) {
         e.preventDefault();
-        changeTutorialLink(e)
+
         const isDirectStepFocus = active === step;
 
-        if (isDirectStepFocus) {
-            const firstFocusableChild = getFirstFocusableChild(step);
-
-            if (firstFocusableChild) {
-                firstFocusableChild.focus();
-                return;
-            }
-        }
-
+        // if (isDirectStepFocus) {
+        //     const firstFocusableChild = getFirstFocusableChild(step);
+        //     if (firstFocusableChild) {
+        //         firstFocusableChild.focus();
+        //         return;
+        //     }
+        // }
+        changeTutorialLink(step)
         cycleMedia(step);
-        return;
     }
-
-    /* =========================
-       M key (sidebar restore)
-    ========================= */
 }
 /* =========================
    GLOBAL NAV (F / A / NUMBERS)
@@ -214,6 +196,7 @@ document.addEventListener('keydown', (e) => {
                 block: 'start',
                 inline: 'nearest'
             })
+            changeTutorialLink(steps[currentIndex]);
             return;
         }
 
@@ -224,6 +207,7 @@ document.addEventListener('keydown', (e) => {
             block  : 'start',
             inline : 'nearest'
         })
+        changeTutorialLink(steps[currentIndex]);
         return;
     }
 
@@ -235,6 +219,9 @@ document.addEventListener('keydown', (e) => {
             (currentIndex - 1 + steps.length) % steps.length;
 
         steps[currentIndex]?.focus();
+                changeTutorialLink(steps[currentIndex]);
+
+        
         return;
     }
 
@@ -247,10 +234,14 @@ document.addEventListener('keydown', (e) => {
         if (num < steps.length) {
             currentIndex = num;
             steps[currentIndex]?.focus();
+                    changeTutorialLink(steps[currentIndex]);
+
         } 
         if(num >= steps.length) {
             currentIndex = steps.length - 1;
             steps[currentIndex]?.focus();
+                    changeTutorialLink(steps[currentIndex]);
+
         }
        return;
     }

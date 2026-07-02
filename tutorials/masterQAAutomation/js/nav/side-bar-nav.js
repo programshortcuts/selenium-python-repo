@@ -1,4 +1,6 @@
 // side-bar-nav.js
+const navLessonTitle = document.querySelector('#navLessonTitle')
+
 import { denlargeAllImages } from "../ui/toggle-img-sizes.js";
 import { pauseAllVideos } from "../ui/video-controls.js";
 import { handleMKey } from "./m-key-handler.js";
@@ -36,8 +38,6 @@ export function intiSideBarLinkAutoFocus(){
         lastFocusedSideBarLink = autoLink;
         injectContent(autoLink.href);
         changeTutorialLink(autoLink)
-    } else {
-        injectContent('home-page.html');
     }
 }
 /* =========================
@@ -65,16 +65,19 @@ allSideBarLinks.forEach((el, i) => {
         removeAllHighlights(allSideBarLinks)
         e.preventDefault();
         lastClickedSideBarLink = el;
+        const title = allSideBarLinks[iAllSideBarLinks]
+        console.log(title)
         injectContent(el.href);
-        changeTutorialLink(e);
+        changeTutorialLink(el);
     });
     // ENTER
     el.addEventListener('keydown', e => {
         const key = e.key.toLowerCase();
-        
         if (key === 'enter') {
+            const title = e.target.innerText
+            console.log(title)
             e.preventDefault();
-            changeTutorialLink(e);
+            changeTutorialLink(el);
             if (lastFocusedSideBarLink == lastClickedSideBarLink &&
                 !e.target.classList.contains('drop-down')
             ){
@@ -203,5 +206,6 @@ export function sideBarNav({ e, focusZone }) {
     /* ---- T KEY ---- */
     if (key === 't') {
         tutorialLink?.focus();
+        // changeTutorialLink(e.target)
     }
 }

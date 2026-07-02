@@ -1,4 +1,5 @@
 // inject-content.js (CLEAN RESET ENGINE)
+
 import { allSideBarLinks, lastClickedSideBarLink, updateLastClicked, getHrefFromLink } from "../nav/side-bar-nav.js";
 import { mainTargetDiv } from "../nav/main-content-nav.js";
 import { initStepNavigation } from "../nav/step-nav.js";
@@ -47,6 +48,7 @@ nxtBtn?.addEventListener('click', e => {
         (iAllSideBarLinks + 1) % allSideBarLinks.length;
     updateLastClicked(allSideBarLinks[iAllSideBarLinks]);
     const href = getHrefFromLink(allSideBarLinks[iAllSideBarLinks]);
+    
     if (href) {
         highlightSidebar();
         injectContent(href);
@@ -84,7 +86,9 @@ prevBtn?.addEventListener('click', e => {
 // =========================
 // CONTENT LOADER
 // =========================
+// export function injectContent({href,e}) {
 export function injectContent(href) {
+    console.log(href)
     fetch(href)
         .then(res => {
             if (!res.ok) throw new Error(res.status);
@@ -107,11 +111,8 @@ export function injectContent(href) {
             // =========================
             // 3. CLEAN FOCUS STATE
             // =========================
-            const firstStep =
-                mainTargetDiv.querySelector('.step-float');
-            if (firstStep) {
-                // firstStep.focus();
-            }
+            // ✅ ADD THIS
+            
             
         })
         .catch(err => {
