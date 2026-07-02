@@ -65,8 +65,7 @@ allSideBarLinks.forEach((el, i) => {
         removeAllHighlights(allSideBarLinks)
         e.preventDefault();
         lastClickedSideBarLink = el;
-        const title = allSideBarLinks[iAllSideBarLinks]
-        console.log(title)
+        
         injectContent(el.href);
         changeTutorialLink(el);
     });
@@ -74,8 +73,21 @@ allSideBarLinks.forEach((el, i) => {
     el.addEventListener('keydown', e => {
         const key = e.key.toLowerCase();
         if (key === 'enter') {
-            const title = e.target.innerText
-            console.log(title)
+            // THIS IS ALL TERIBLE CODE, we need side-bar links in object sibe-bar-links {lesson}
+            /**
+             * sidebarLinks = {
+             *   Video 1-3 {
+             *        03-01: a element,
+             *        03-03: a element
+             *   },
+             *   Video 4 {
+             *        04-01:; element,
+             *        ...
+             *      }
+             * }
+             */
+            
+            navLessonTitle.innerHTML = e.target.innerHTML
             e.preventDefault();
             changeTutorialLink(el);
             if (lastFocusedSideBarLink == lastClickedSideBarLink &&

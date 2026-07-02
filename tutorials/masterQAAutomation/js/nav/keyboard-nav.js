@@ -17,6 +17,8 @@ export function keyboardNav({e}) {
     if (!navState.zone) return
     let focusZone    
     
+    
+
     const key = e.key.toLowerCase();
     if (key === 'm') {
         e.preventDefault();
