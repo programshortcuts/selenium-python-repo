@@ -7,6 +7,7 @@ import { sideBarNav } from "./side-bar-nav.js"
 import { mainContentNav } from "./main-content-nav.js"
 import { getFocusZone } from "./get-focus-zone.js"
 // const popupLetterNav = document.querySelector('#popupLetterNav')
+import { lastClickedSideBarLink } from "./side-bar-nav.js"
 let isLetterNavEnabled = false
 export const navState = {
     zone: null,

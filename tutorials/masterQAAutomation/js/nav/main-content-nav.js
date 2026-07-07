@@ -28,10 +28,8 @@ export function mainContentNav({ e, focusZone }) {
     }
     if (!key) return;
     const active = document.activeElement;
-
     // ONLY main content links
     const mainLink = active?.closest?.('#mainTargetDiv a');
-
     if (mainLink) {
         // LET BROWSER HANDLE ENTER/CLICK NATURALLY
         return;
@@ -80,30 +78,24 @@ export function mainContentNav({ e, focusZone }) {
     // HEADER / NAV SHORTCUTS
     // =========================
     if (key === 'n') {
-
         navBarLessonTitle?.focus?.();
         return;
     }
-
     if (key === 's') {
-
         if (mainContainer.classList.contains('collapsed')) {
             sideBarBtn?.focus?.();
             return;
         }
-
         if (lastClickedSideBarLink) {
             lastClickedSideBarLink.focus();
         } else {
             sideBarBtn?.focus?.();
         }
-
         return;
     }
     if (key === 't') {
         console.log()
         getTutorialLink().focus()
-        
         return;
     }
     // =========================
@@ -111,7 +103,5 @@ export function mainContentNav({ e, focusZone }) {
     // DO NOT HANDLE STEP NAV HERE ANYMORE
     // =========================
     // Step system is fully handled inside step-nav.js
-    if(key === 'escape'){
-        denlargeAllImages()
-    }
+    if(key === 'escape'){denlargeAllImages()}
 }

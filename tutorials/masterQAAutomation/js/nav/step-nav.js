@@ -1,7 +1,7 @@
 // step-nav.js
 /* =========================
-   STEP NAVIGATION (CLEAN)
 ========================= */
+// STEP NAVIGATION(CLEAN)
 import { pauseAllVideos } from "../ui/video-controls.js";
 import { cycleMedia, denlargeAllImages } from "../ui/toggle-img-sizes.js";
 import { changeTutorialLink } from "../ui/change-tutorial-link.js";
@@ -12,8 +12,8 @@ let steps = [];
 let currentIndex = 0;
 export let lastStep = null;
 /* =========================
-   INIT
 ========================= */
+// INIT
 export function initStepNavigation({ mainTargetDiv }) {
     if (!mainTargetDiv) return;
 
@@ -38,8 +38,12 @@ export function initStepNavigation({ mainTargetDiv }) {
             });
         });
 
-        step.addEventListener('click', () => {
+        step.addEventListener('click', (e) => {
             changeTutorialLink(step);
+
+            const normalLink = e.target.closest('.link-default a');
+            
+            if (normalLink) return;
         });
 
         // step.addEventListener('click', (e) => {
@@ -60,8 +64,8 @@ export function initStepNavigation({ mainTargetDiv }) {
     syncStep();
 }
 /* =========================
-   KEY HANDLER (STEP ONLY)
 ========================= */
+// KEY HANDLER (STEP ONLY)
 function handleStepKey(e, step, index) {
     const key = e.key.toLowerCase();
     const active = document.activeElement;
@@ -99,12 +103,18 @@ function handleStepKey(e, step, index) {
 document.addEventListener('keydown', (e) => {
     const key = e.key.toLowerCase();
     const active = document.activeElement;
-
     if (!steps.length) return;
-    /* =========================
-       COPY CODE NAVIGATION
-    ========================= */
-
+    console.log(e.target )
+    // COPY CODE NAVIGATION
+    
+    if ( e.target.matches('.links-default a') || e.target.closest('.link-default a')) {
+        const href = e.target.href;
+        const hash = href.substring(href.indexOf('#'));
+        console.log(hash)
+        const sideVidLink = document.querySelector(hash)
+        sideVidLink.focus()
+        return
+    }
     const activeCopyCode =
         active?.classList?.contains('copy-code')
             ? active
@@ -149,7 +159,12 @@ document.addEventListener('keydown', (e) => {
 
         if (key === 's') {
             e.preventDefault();
-            lastClickedSideBarLink?.focus();
+            console.log('s click')
+            return;
+        }
+        // console.log(e.target)
+        if (key === '#') {
+            // e.preventDefault();
             return;
         }
 
@@ -164,14 +179,11 @@ document.addEventListener('keydown', (e) => {
         active?.tagName === 'VIDEO';
 
     if (isVideo) {
-
         if (key === 's') {
             lastClickedSideBarLink?.focus();
         }
-
         return;
     }
-
     if (
         active?.closest?.('.side-bar') ||
         active?.id === 'sideBarBtn'
@@ -253,12 +265,10 @@ document.addEventListener('keydown', (e) => {
 function syncStep() {
     const active = document.activeElement;
     const step = active?.closest?.('.step-float');
-
     if (!step) {
         currentIndex = 0;
         return;
     }
-
     const idx = steps.indexOf(step);
     if (idx !== -1) currentIndex = idx;
 }
