@@ -77,6 +77,7 @@ function handleStepKey(e, step, index) {
 
     if (key === 'enter' && e.shiftKey) {
         e.preventDefault();
+        // toggle activate
         cycleMedia(step);
         return;
     }
@@ -86,13 +87,13 @@ function handleStepKey(e, step, index) {
 
         const isDirectStepFocus = active === step;
 
-        // if (isDirectStepFocus) {
-        //     const firstFocusableChild = getFirstFocusableChild(step);
-        //     if (firstFocusableChild) {
-        //         firstFocusableChild.focus();
-        //         return;
-        //     }
-        // }
+        if (isDirectStepFocus) {
+            const firstFocusableChild = getFirstFocusableChild(step);
+            if (firstFocusableChild) {
+                firstFocusableChild.focus();
+                return;
+            }
+        }
         changeTutorialLink(step)
         cycleMedia(step);
     }
@@ -137,7 +138,7 @@ document.addEventListener('keydown', (e) => {
         }
         if (key === 'f') {
             e.preventDefault();
-
+            console.log('f')
             const nextIndex =
                 (currentCodeIndex + 1) %
                 copyCodes.length;
@@ -276,3 +277,7 @@ function syncStep() {
    EXPOSE
 ========================= */
 export function getLastStep() {return lastStep;}
+
+function getFirstFocusableChild(step){
+    step.querySelector('.copy-code').focus()
+}
