@@ -1,4 +1,5 @@
 // video-controls.js -web-dev-simp-repo
+
 /* =========================
    VIDEO CONTROLS (CLEAN SYSTEM)
 ========================= */
@@ -6,6 +7,8 @@
 export function initAllVideos(root = document) {
     const steps = root.querySelectorAll('.step-float');
     steps.forEach(bindVideoControls);
+    const vidBtns = root.querySelectorAll('.step-vid button')
+    vidBtns.forEach(el => el.setAttribute('tabindex','-1'))
 }
 
 function bindVideoControls(step) {
