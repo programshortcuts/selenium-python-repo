@@ -3,11 +3,9 @@ import { mainTargetDiv } from "./main-content-nav.js";
 import { lastStep } from "./step-nav.js";
 
 export function handleMKey() {
-    console.log('here')
     const active = document.activeElement;
     const sideBarLinks = active.closest('.side-bar-links')
     if(sideBarLinks){
-        console.log('side')
         if(active.classList.contains('highlight')) active.classList.remove('highlight')
         mainTargetDiv.focus()
         return

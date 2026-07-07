@@ -78,13 +78,18 @@ function handleStepKey(e, step, index) {
     if (key === 'enter' && e.shiftKey) {
         e.preventDefault();
         // toggle activate
+        
         cycleMedia(step);
         return;
     }
 
     if (key === 'enter' && !e.shiftKey) {
         e.preventDefault();
-
+        if (e.target.tagName == 'A') {
+            const a = e.target
+            window.open(a.href, '_blank')
+            return
+        }
         const isDirectStepFocus = active === step;
 
         if (isDirectStepFocus) {
@@ -105,13 +110,11 @@ document.addEventListener('keydown', (e) => {
     const key = e.key.toLowerCase();
     const active = document.activeElement;
     if (!steps.length) return;
-    console.log(e.target )
     // COPY CODE NAVIGATION
     
     if ( e.target.matches('.links-default a') || e.target.closest('.link-default a')) {
         const href = e.target.href;
         const hash = href.substring(href.indexOf('#'));
-        console.log(hash)
         const sideVidLink = document.querySelector(hash)
         sideVidLink.focus()
         return
@@ -120,16 +123,12 @@ document.addEventListener('keydown', (e) => {
         active?.classList?.contains('copy-code')
             ? active
             : null;
-
     if (activeCopyCode) {
-
         const parentStep =
             activeCopyCode.closest('.step-float');
-
         const copyCodes = [
             ...parentStep.querySelectorAll('.copy-code')
         ];
-
         const currentCodeIndex =
             copyCodes?.indexOf(activeCopyCode);
         if(!isNaN(key)){
@@ -142,28 +141,22 @@ document.addEventListener('keydown', (e) => {
             const nextIndex =
                 (currentCodeIndex + 1) %
                 copyCodes.length;
-
             copyCodes[nextIndex]?.focus();
             return;
         }
-
         if (key === 'a') {
             e.preventDefault();
-
             const prevIndex =
                 (currentCodeIndex - 1 + copyCodes.length) %
                 copyCodes.length;
-
             copyCodes[prevIndex]?.focus();
             return;
         }
-
         if (key === 's') {
             e.preventDefault();
             console.log('s click')
             return;
         }
-        // console.log(e.target)
         if (key === '#') {
             // e.preventDefault();
             return;
@@ -178,7 +171,6 @@ document.addEventListener('keydown', (e) => {
 
     const isVideo =
         active?.tagName === 'VIDEO';
-
     if (isVideo) {
         if (key === 's') {
             lastClickedSideBarLink?.focus();
@@ -279,5 +271,6 @@ function syncStep() {
 export function getLastStep() {return lastStep;}
 
 function getFirstFocusableChild(step){
-    step.querySelector('.copy-code').focus()
+    const copyCode = step.querySelector('.copy-code')
+    copyCode?.focus()
 }

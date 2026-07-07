@@ -130,7 +130,6 @@ sideBar.addEventListener('focusout', () => sideBarFocused = false);
 sideBarBtn.addEventListener('keydown', e => {
     if(e.key.toLowerCase() === 'enter' ){
         hideTopicSnips()
-        console.log('here')
     }
     if (e.key.toLowerCase() === 's') {
         lastClickedSideBarLink.focus()
