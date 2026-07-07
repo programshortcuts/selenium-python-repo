@@ -120,7 +120,7 @@ export function initGlobalMediaReset() {
 export function bindMainFocusReset(mainTargetDiv) {
     if (!mainTargetDiv) return;
 
-    mainTargetDiv.addEventListener('focusin', (e) => {
+    mainTargetDiv.addEventListener('focus', (e) => {
         if (e.target instanceof Element && e.target.closest('.vid-cntrl-btns, .playbtn, .fwdBtn, .rwdBtn')) {
             return;
         }
