@@ -1,0 +1,124 @@
+<!-- 05-02.html -->
+<div id="targetDiv">
+    <header>
+        <h3 id="">video 5-3 <span class="t">Problems / Summary</span></h3>
+    </header>
+    <div tabindex="0" class="step-float"
+        data-video="https://www.youtube.com/watch?v=BQo4HPfkieM&list=PLO-SpLojKeZumJOr4PqauiA7NOEQNPIRL&index=5"
+        data-timestamp="1300">
+        <h4>2</h4>
+        <div class="step-txt">
+            <p>
+                The reason why this sucks, and the reason why nothing works, selenium commands have changed, and you suck at life,
+                you have no freinds, no body likes you,
+            </p>
+            <p>
+                realy quick this is what chat gpt,i'm too burnt out, i've been doing this on and off since 4am int's 11:20, 
+                i want to sleep forever, i'm so burnt out, i'm too tired to have a panice attack, i'm too tired to break the fucking was 
+                with my fist, but i want to, i want to leave a wake of damage on every part of this fucking apartment, 
+                i'm too tired, but i would love to put my foot the the fucking door , 
+
+            </p>
+            <h5><strong>chat gpt:</strong></h5>
+            <p>
+                You're actually running into two different problems here.
+                
+                1. executable_path is no longer valid
+                
+                If you're using Selenium 4, this line:
+                <br>
+                <code class="t">driver = webdriver.Chrome(executable_path="../drivers/chromedriver")</code>
+            </p>
+            <p>
+                You need:
+            </p>
+            <div class="code-container">
+                <pre tabindex="0" class="copy-code">
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+
+service = Service("../drivers/chromedriver")
+driver = webdriver.Chrome(service=service)</pre>
+            </div>
+            <p>
+                or   Easier (like i fucking thought)
+            </p>
+            <div class="code-container">
+                <pre tabindex="0" class="copy-code">
+from selenium import webdriver
+
+driver = webdriver.Chrome()</pre>
+            </div>
+            
+            <p>
+                <span class="t">*******ALSO,</span>
+            </p>
+            <p>
+                2. You're using Selenium 3 syntax everywhere
+                
+                These methods were removed:
+            </p>
+            <ul>
+                <li><code class="t">driver.find_element_by_id(...)</code></li>
+                <li><code class="t">driver.find_element_by_xpath(...)</code></li>
+                
+            </ul>
+            <p>
+                You need,
+            </p>
+            <div class="code-container">
+                <pre tabindex="0" class="copy-code">
+from selenium.webdriver.common.by import By
+
+driver.find_element(By.ID, "sb_form_q")
+driver.find_element(By.XPATH, "//label[@for='sb_form_go']")</pre>
+            </div>
+            
+        </div>
+        
+    </div>
+    <div tabindex="0" class="step-float"
+        data-video="https://www.youtube.com/watch?v=BQo4HPfkieM&list=PLO-SpLojKeZumJOr4PqauiA7NOEQNPIRL&index=5"
+        data-timestamp="1300">
+        <h4>2 - <span class="t">DID NOT WORK</span> + more problems</h4>
+        <div class="step-txt">
+            <h5><strong>ChatGpt:</strong></h5>
+            <p>
+                I actually recommend something easier
+                
+                Nowadays, Selenium downloads the correct driver automatically.
+                
+                First update Selenium:
+            </p>
+            <div class="code-container">
+                <code tabindex="0" class="copy-code">
+pip install -U selenium</code>
+            </div>
+            <div class="code-container">
+                <pre tabindex="0" class="copy-code">
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
+driver = webdriver.Chrome()
+
+driver.get("https://bing.com")
+
+driver.find_element(By.ID, "sb_form_q").send_keys("selenium")
+
+driver.find_element(By.ID, "search_icon").click()
+
+time.sleep(7)
+
+driver.quit()</pre>
+            </div>
+            
+            
+        </div>
+        
+    </div>
+
+
+    
+    </div>
+</div>
