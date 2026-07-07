@@ -85,6 +85,7 @@ function handleStepKey(e, step, index) {
 
     if (key === 'enter' && !e.shiftKey) {
         e.preventDefault();
+
         if (e.target.tagName == 'A') {
             const a = e.target
             window.open(a.href, '_blank')
