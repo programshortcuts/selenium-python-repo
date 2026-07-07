@@ -7,4 +7,4 @@
 .m {color: magenta;}
 .o {color: orange;}
 .r{color: red;}
-.t{color: tomato;}
+.t{color: rgb(222, 81, 56) !important; font-weight: 888;}
